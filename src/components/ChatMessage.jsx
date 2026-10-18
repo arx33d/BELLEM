@@ -455,12 +455,12 @@ export default function ChatMessage({
                               <span className="text-gemini-textDim block text-[10px] uppercase mb-1">Security Headers</span>
                               {message.webAnalysis.securityHeadersPresent?.length > 0 && (
                                 <div className="text-emerald-400/90 text-[11px] mb-1">
-                                  ✓ Present: {message.webAnalysis.securityHeadersPresent.join(', ')}
+                                  [Present] {message.webAnalysis.securityHeadersPresent.join(', ')}
                                 </div>
                               )}
                               {message.webAnalysis.securityIssues?.length > 0 && (
                                 <div className="text-amber-400/90 text-[11px]">
-                                  ⚠ Missing: {message.webAnalysis.securityIssues.join(', ')}
+                                  [Missing] {message.webAnalysis.securityIssues.join(', ')}
                                 </div>
                               )}
                             </div>
@@ -492,7 +492,7 @@ export default function ChatMessage({
                             <div className="flex items-center gap-2">
                               <span className="text-white font-medium">Crawled Hierarchy</span>
                               <span className="px-2 py-0.5 rounded-full bg-gemini-surface-variant text-[10px] text-gemini-textDim">
-                                {message.siteMap?.totalCrawled || 0} pages crawled • {message.siteMap?.totalDiscoveredUrls || 0} URLs discovered
+                                {message.siteMap?.totalCrawled || 0} pages crawled | {message.siteMap?.totalDiscoveredUrls || 0} URLs discovered
                               </span>
                             </div>
 
@@ -533,7 +533,7 @@ export default function ChatMessage({
                                       </span>
                                       {r.title && r.title !== r.path && (
                                         <span className="text-gemini-textDim text-[10px] truncate hidden md:inline">
-                                          — {r.title}
+                                          - {r.title}
                                         </span>
                                       )}
                                     </div>
@@ -597,7 +597,7 @@ export default function ChatMessage({
                                   onClick={() => setActiveCommandOutput(null)}
                                   className="text-gemini-textDim hover:text-white px-1"
                                 >
-                                  ✕
+                                  <X className="w-3 h-3" />
                                 </button>
                               </div>
                               <pre className="text-gemini-text text-[11px] whitespace-pre-wrap max-h-48 overflow-y-auto">
@@ -734,7 +734,7 @@ export default function ChatMessage({
                                 <div className="text-white font-semibold text-xs flex items-center gap-2">
                                   <span>FSafe Score: {fsafeData?.score ?? message.fsafe?.score ?? '--'}/100</span>
                                   <span className="text-[10px] text-gemini-textDim font-normal font-sans">
-                                    • {fsafeData?.verdict || message.fsafe?.verdict || 'Automated Vulnerability Scan'}
+                                    - {fsafeData?.verdict || message.fsafe?.verdict || 'Automated Vulnerability Scan'}
                                   </span>
                                 </div>
                                 <div className="text-[10px] text-gemini-textDim">
@@ -916,10 +916,10 @@ export default function ChatMessage({
                         </span>
                       )}
                       {message.stats.evalCount > 0 && (
-                        <span>• {message.stats.evalCount} tokens</span>
+                        <span>/ {message.stats.evalCount} tokens</span>
                       )}
                       {message.stats.totalDuration && (
-                        <span>• {message.stats.totalDuration}s</span>
+                        <span>/ {message.stats.totalDuration}s</span>
                       )}
                     </div>
                   ) : <div />}

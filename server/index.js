@@ -325,7 +325,7 @@ app.post('/api/chat', async (req, res) => {
           const securityPresent = (analysis.security?.present || []).map(p => p.name).join(', ') || 'None';
           const securityMissing = (analysis.security?.missing || []).join(', ') || 'None';
           const sampleScripts = (analysis.structure?.sampleScripts || []).join('\n  - ') || 'None';
-          const headings = (analysis.structure?.h1 || []).concat(analysis.structure?.h2 || []).slice(0, 8).map(h => `• ${h}`).join('\n') || 'None';
+          const headings = (analysis.structure?.h1 || []).concat(analysis.structure?.h2 || []).slice(0, 8).map(h => `- ${h}`).join('\n') || 'None';
 
           fullSystemPrompt += `\n\n=== LIVE WEBSITE DEEP ANALYSIS (ENTRY PAGE) ===
 Target URL: ${analysis.url} (${analysis.domain})
@@ -369,7 +369,7 @@ ${analysis.textContent}
           };
 
           const crawledRoutesText = (audit.crawl.routes || [])
-            .map(r => `  • [${r.status}] ${r.path} (${r.type}) - "${r.title}" [${r.linksCount} internal links]`)
+            .map(r => `  - [${r.status}] ${r.path} (${r.type}) - "${r.title}" [${r.linksCount} internal links]`)
             .join('\n');
 
           fullSystemPrompt += `\n\n=== LIVE SITE MAP & CRAWL RECONNAISSANCE ===
@@ -407,7 +407,7 @@ Indexed URLs Found: ${audit.sitemap?.totalUrlsFound || 0}
 Discovered Sitemaps: ${audit.sitemap?.discoveredSitemaps?.join(', ') || 'None'}
 
 [PROBED API & DEVELOPER ENDPOINTS]
-${(audit.apiEndpoints || []).map(ep => `  • ${ep.path} [${ep.type}] Status: ${ep.status} (${ep.contentType})`).join('\n') || 'No exposed standard API endpoints detected'}
+${(audit.apiEndpoints || []).map(ep => `  - ${ep.path} [${ep.type}] Status: ${ep.status} (${ep.contentType})`).join('\n') || 'No exposed standard API endpoints detected'}
 === END COMMANDS & RECONNAISSANCE ===`;
         }
 
@@ -415,11 +415,11 @@ ${(audit.apiEndpoints || []).map(ep => `  • ${ep.path} [${ep.type}] Status: ${
           detectedFSafe = audit.fsafe;
 
           const categoryLines = (audit.fsafe.categories || []).map(c =>
-            `  • [${c.status}] ${c.name}: ${c.details}`
+            `  - [${c.status}] ${c.name}: ${c.details}`
           ).join('\n');
 
           const probeLines = (audit.fsafe.probedFiles || []).map(p =>
-            `  • ${p.path} (${p.label}): Status ${p.status} ${p.exposed ? '==> CRITICAL EXPOSURE' : '==> Protected/Inaccessible'}`
+            `  - ${p.path} (${p.label}): Status ${p.status} ${p.exposed ? '==> CRITICAL EXPOSURE' : '==> Protected/Inaccessible'}`
           ).join('\n');
 
           fullSystemPrompt += `\n\n=== FSAFE AUTOMATED VULNERABILITY AUDIT (PRE-AUTHORIZED PEN-TEST SCAN) ===
