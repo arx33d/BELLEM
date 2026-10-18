@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #131314;
+  color: #e3e3e3;
+  font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* Custom slim scrollbar (Gemini style) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Hide scrollbars completely on input textareas to prevent slider artifacts */
+textarea::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+textarea,
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Gemini iridescent glowing text & gradients */
+.gemini-gradient-text {
+  background: linear-gradient(135deg, #4285f4 0%, #9b72cb 50%, #d96570 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gemini-gradient-border {
+  border-image: linear-gradient(135deg, #4285f4, #9b72cb, #d96570) 1;
+}
+
+.gemini-sparkle-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(66, 133, 244, 0.15) 0%, rgba(155, 114, 203, 0.08) 50%, transparent 100%);
+}
+
+/* Blinking cursor for streaming */
+.streaming-cursor::after {
+  content: '▋';
+  display: inline-block;
+  margin-left: 2px;
+  vertical-align: baseline;
+  color: #a8c7fa;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Markdown prose enhancements */
+.prose-gemini {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #e3e3e3;
+}
+
+.prose-gemini p {
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+}
+
+.prose-gemini p:first-child {
+  margin-top: 0;
+}
+
+.prose-gemini p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-gemini h1, .prose-gemini h2, .prose-gemini h3, .prose-gemini h4 {
+  color: #ffffff;
+  font-weight: 600;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+}
+
+.prose-gemini h1 { font-size: 1.4rem; }
+.prose-gemini h2 { font-size: 1.25rem; }
+.prose-gemini h3 { font-size: 1.1rem; }
+
+.prose-gemini ul {
+  list-style-type: disc;
+  padding-left: 1.4rem;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-gemini ol {
+  list-style-type: decimal;
+  padding-left: 1.4rem;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-gemini li {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.prose-gemini blockquote {
+  border-left: 3px solid #4285f4;
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  color: #9aa0a6;
+  font-style: italic;
+}
+
+.prose-gemini table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.prose-gemini th, .prose-gemini td {
+  border: 1px solid #333537;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.prose-gemini th {
+  background-color: #212225;
+  color: #a8c7fa;
+  font-weight: 600;
+}
+
+.prose-gemini tr:nth-child(even) {
+  background-color: #1a1a1c;
+}
+
+.prose-gemini a {
+  color: #a8c7fa;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-gemini a:hover {
+  color: #c58af9;
+}
+
+.prose-gemini code:not(pre code) {
+  background-color: #282a2c;
+  color: #e3e3e3;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 0.88em;
+  border: 1px solid #37393b;
+}
